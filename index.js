@@ -30,6 +30,7 @@ const idserv = "317263352353128448";
 const idrolewhitelist = "913150249747488788";
 const idrolebest = "912793132729528330";
 const idrolenul = "913858262888235068";
+const idroleadmin = "913150249747488788";
 
 client.on("message", async message => {
     let prefix = "!";
@@ -46,8 +47,33 @@ client.on("message", async message => {
             }
         }
     }
-
-    if (message.content.startsWith(prefix + "upload")) {
+    if (message.content.startsWith(prefix + "seuil")) {
+        if (message.member.roles.cache.some(role => role.name === idroleadmin)) {
+            try {
+                let lol = parseFloat(arg[1]);
+                if (!arg[1]) {
+                    message.channel.send("Please enter an ETH threshold");
+                }
+                else if (lol >= 0 && lol <= 100000 && typeof (lol) === "number") {
+                    console.log(lol);
+                    console.log(typeof (lol));
+                    console.log("vf");
+                    seuil = lol;
+                    message.channel.send("The ETH threshold has been changed to " + arg[1]);
+                    bdd["seuil"] = { "niveau": lol }
+                    Savebdd();
+                }
+                else {
+                    console.log(lol);
+                    console.log(typeof (lol));
+                    message.channel.send("invalid threshold");
+                }
+            } catch (error) {
+                message.channel.send("The threshold is invalid");
+            }
+        }
+    }
+    else if (message.content.startsWith(prefix + "upload")) {
         if (message.member.roles.cache.some(role => role.name === 'owner')) {
             if (verif === 0) {
                 xlsxFile('source.xlsx').then((rows) => {
