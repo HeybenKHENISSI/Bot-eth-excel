@@ -49,6 +49,7 @@ client.on("message", async message => {
     }
     if (message.content.startsWith(prefix + "seuil")) {
         if (message.member.roles.cache.some(role => role.name === idroleadmin)) {
+            console.log("gyugu");
             try {
                 let lol = parseFloat(arg[1]);
                 if (!arg[1]) {
