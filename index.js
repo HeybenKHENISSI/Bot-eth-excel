@@ -30,7 +30,7 @@ const idserv = "317263352353128448";
 const idrolewhitelist = "913150249747488788";
 const idrolebest = "912793132729528330";
 const idrolenul = "913858262888235068";
-const idroleadmin = "913150249747488788";
+const idroleadmin = 'owner';
 
 client.on("message", async message => {
     let prefix = "!";
