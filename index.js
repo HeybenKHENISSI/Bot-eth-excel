@@ -30,15 +30,15 @@ const idserv = "317263352353128448";
 const idrolewhitelist = "913150249747488788";
 const idrolebest = "912793132729528330";
 const idrolenul = "913858262888235068";
-const idroleadmin = 'owner';
+const idroleadmin = 'CEO Moody Ape';
 
 client.on("message", async message => {
     let prefix = "!";
     let arg = message.content.trim().split(/ +/g)
 
-    if (message.channel.id == '918976537368338464') {
+    if (message.channel.id == '922946613645836378') {
         if (message.member.user.bot) return;
-        if (message.member.roles.cache.some(role => role.name === 'owner')) {
+        if (message.member.roles.cache.some(role => role.name === 'CEO Moody Ape')) {
 
             if (message.attachments) {
                 message.attachments.forEach(a => {
@@ -75,7 +75,7 @@ client.on("message", async message => {
         }
     }
     else if (message.content.startsWith(prefix + "upload")) {
-        if (message.member.roles.cache.some(role => role.name === 'owner')) {
+        if (message.member.roles.cache.some(role => role.name === 'CEO Moody Ape')) {
             if (verif === 0) {
                 xlsxFile('source.xlsx').then((rows) => {
                     let s = 0;
