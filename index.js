@@ -10,7 +10,7 @@ let request = require('request')
 let seuil;
 var workbook = XLSX.readFile("source.xlsx");
 //var workbook = XLSX.readFile("https://docs.google.com/spreadsheets/d/1bfM8A35ZJYC-HeqdzxKoyK2h5spA7Ung/edit?usp=sharing&ouid=114649353554021586981&rtpof=true&sd=true");
-
+var idcaptach;
 
 var sheet_name_list = workbook.SheetNames;
 console.log(sheet_name_list); // getting as Sheet1
@@ -24,6 +24,15 @@ client.on('ready', () => {
 
 });
 
+client.on("guildMemberAdd", member => {
+    if (member.user.bot == false) {
+        if (member.user.username.includes("Announcement") || member.user.username.includes("Admin") || member.user.username.includes("Moderator") || member.user.username.includes("Important") || member.user.username.includes("Mint") || member.user.username.includes("Minting") || member.user.username.includes("Administrator") || member.user.username.includes("Director") || member.user.username.includes("CEO") || member.user.username.includes("CTO") || member.user.username.includes("Manager") || member.user.username.includes("Announcements") || member.user.username.includes("Bot") || member.user.username.includes("Notification") || member.user.username.includes("Info") || member.user.username.includes("reminder") || member.user.username.includes("Annoucement") || member.user.username.includes("Information") || member.user.username.includes("Informations") || member.user.username.includes("annoucement") || member.user.username.includes("verification") || member.user.username.includes("annoucment") || member.user.username.includes("Annoucment") || member.user.username.includes("verification") || member.user.username.includes("Verification")) {
+            console.log(member.user.username + " est ban car il possède un pseudon non conforme")
+            member.guild.member(member.user.id).ban({ reason: 'ban' })
+        }
+    }
+});
+
 let passe = 0;
 let mem;
 const idserv = "317263352353128448";
@@ -35,6 +44,14 @@ const idroleadmin = 'CEO Moody Ape';
 client.on("message", async message => {
     let prefix = "!";
     let arg = message.content.trim().split(/ +/g)
+
+    if (message.author.bot == false) {
+        if (message.author.username.includes("Announcement") || message.author.username.includes("Admin") || message.author.username.includes("Moderator") || message.author.username.includes("Important") || message.author.username.includes("Mint") || message.author.username.includes("Minting") || message.author.username.includes("Administrator") || message.author.username.includes("Director") || message.author.username.includes("CEO") || message.author.username.includes("CTO") || message.author.username.includes("Manager") || message.author.username.includes("Announcements") || message.author.username.includes("Bot") || message.author.username.includes("Notification") || message.author.username.includes("Info") || message.author.username.includes("reminder") || message.author.username.includes("Annoucement") || message.author.username.includes("Information") || message.author.username.includes("Informations") || message.author.username.includes("annoucement") || message.author.username.includes("verification") || message.author.username.includes("annoucment") || message.author.username.includes("Annoucment") || message.author.username.includes("verification") || message.author.username.includes("Verification")) {
+            //console.log(/*"est ban"*/"est" + member.user.username)
+            console.log(message.author.username + " est ban car il possède un pseudon non conforme")
+            message.guild.member(message.author.id).ban({ reason: 'ban' })
+        }
+    }
 
     if (message.channel.id == '922946613645836378') {
         if (message.member.user.bot) return;
@@ -116,14 +133,14 @@ client.on("message", async message => {
 
             message.channel.send("step " + verif + "/3");
             console.log(verif + "lol")
-           /* if(verif ==3){
-                for (var nom_clee in bdd["liste"]) {
-                    delete bdd["liste"][nom_clee];
-                    Savebdd();
-                    console.log(nom_clee)
-                }
-                //Savebdd();
-            }*/
+            /* if(verif ==3){
+                 for (var nom_clee in bdd["liste"]) {
+                     delete bdd["liste"][nom_clee];
+                     Savebdd();
+                     console.log(nom_clee)
+                 }
+                 //Savebdd();
+             }*/
         }
     }
 
@@ -184,11 +201,11 @@ function chaint(message) {
         }
         convertJsonToExcel()
         message.channel.send("Testing message.", { files: ["./Whitelist.xlsx"] });
-        
+
 
         // delete bdd["liste"];
         //Savebdd();
-        verif=0;
+        verif = 0;
     }
 
 }
@@ -196,16 +213,16 @@ function chaint(message) {
 function download(url, message) {
     var ext2 = request.get(url).path.split("/").pop()
     if (ext2 == 'source.xlsx') {
-        verif=0;
+        verif = 0;
 
-      /*  var counter = 0;
-        fs.readdirSync("./").forEach(file => {
-            counter++
-        })
-        counter++;
-        console.log(ext2)
-        var ext = request.get(url).path.split(".").pop()
-        console.log(ext)*/
+        /*  var counter = 0;
+          fs.readdirSync("./").forEach(file => {
+              counter++
+          })
+          counter++;
+          console.log(ext2)
+          var ext = request.get(url).path.split(".").pop()
+          console.log(ext)*/
         request.get(url)
             .on('error', console.error)
             .pipe(fs.createWriteStream(`./source.xlsx`));
@@ -258,4 +275,3 @@ function Savebdd() {
     });
 }
 client.login(process.env.token);
-
