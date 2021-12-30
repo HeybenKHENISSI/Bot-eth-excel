@@ -11,7 +11,7 @@ let seuil;
 var workbook = XLSX.readFile("source.xlsx");
 //var workbook = XLSX.readFile("https://docs.google.com/spreadsheets/d/1bfM8A35ZJYC-HeqdzxKoyK2h5spA7Ung/edit?usp=sharing&ouid=114649353554021586981&rtpof=true&sd=true");
 var idcaptach;
-
+//lol
 var sheet_name_list = workbook.SheetNames;
 console.log(sheet_name_list); // getting as Sheet1
 const xlsxFile = require('read-excel-file/node');
